@@ -18,8 +18,6 @@ public class User {
     private String name;
     private String email;
     private String token;
-    @Column(name="created_at")
     private java.time.ZonedDateTime createdAt;
-    @Column(name="updated_at")
     private java.time.ZonedDateTime updatedAt;
 }

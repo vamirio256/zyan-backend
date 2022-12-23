@@ -1,5 +1,6 @@
 package com.zyan.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,19 +24,16 @@ public class Song {
     private String name;
     private String file;
     private String image;
-    @Column(name = "week_view")
     private int weekView = 0;
-    @Column(name = "total_view")
     private int totalView = 0;
-    @Column(name = "created_at")
-    private java.time.LocalDateTime createdAt;
-    @Column(name = "updated_at")
-    private java.time.LocalDateTime updatedAt;
+    private java.time.ZonedDateTime createdAt;
+    private java.time.ZonedDateTime updatedAt;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "genresHasSongs")
-    private Set<Genre> genres = new HashSet<>();
+    private Set<Genre> genres;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="album_id", referencedColumnName = "id")
     private Album album;
 }

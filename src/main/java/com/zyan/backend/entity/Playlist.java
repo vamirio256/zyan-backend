@@ -17,10 +17,7 @@ public class Playlist {
     private int id;
     private String name;
     private String image;
-    @Column(name = "total_view")
     private int totalView = 0;
-    @Column(name = "created_at")
     private java.time.ZonedDateTime createdAt;
-    @Column(name = "updated_at")
     private java.time.ZonedDateTime updatedAt;
 }

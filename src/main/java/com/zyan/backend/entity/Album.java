@@ -24,8 +24,7 @@ public class Album {
     private String image;
     private java.time.ZonedDateTime createdAt;
     private java.time.ZonedDateTime updatedAt;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    
+    @OneToMany(mappedBy = "album")
     private Set<Song> songs;
 }

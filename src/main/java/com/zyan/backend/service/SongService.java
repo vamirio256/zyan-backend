@@ -1,12 +1,14 @@
 package com.zyan.backend.service;
 
+import com.zyan.backend.data.DataHandler;
 import com.zyan.backend.entity.Song;
 import com.zyan.backend.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.security.Timestamp;
-import java.time.LocalDateTime;
+import java.io.IOException;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -16,10 +18,13 @@ public class SongService {
     @Autowired
     private SongRepository songRepository;
 
-    public Song saveSong(Song song) {
-        song.setCreatedAt(LocalDateTime.now());
-        song.setUpdatedAt(LocalDateTime.now());
-        System.out.println(song.toString());
+    @Autowired
+    private DataHandler dataHandler;
+
+    public Song saveSong(Song song, MultipartFile file) throws IOException {
+        song.setCreatedAt(ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
+        song.setUpdatedAt(ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
+        song.setFile(dataHandler.storeAudio(file, song.getName()));
         return songRepository.save(song);
     }
 
@@ -27,11 +32,11 @@ public class SongService {
         return songRepository.saveAll(songs);
     }
 
-    public List<Song> getSongs() {
+    public List<Song> findSongs() {
         return songRepository.findAll();
     }
 
-    public Song getSongById(int id) {
+    public Song findSongById(int id) {
         return songRepository.findById(id).orElse(null);
     }
 

@@ -11,7 +11,7 @@ public class GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
-    public Genre getGenreById(int id){
+    public Genre findGenreById(int id){
         return genreRepository.findById(id).orElse(null);
     }
 
@@ -19,4 +19,12 @@ public class GenreService {
         System.out.println(genre.toString());
         return genreRepository.save(genre);
     }
+
+//    public void deleteGenre(String id) throws Exception{
+//        Genre genre = genreRepository.findById(id).orElse(null);
+//
+//        if(genre==null){
+//            throw new Exception(NotF)
+//        }
+//    }
 }
